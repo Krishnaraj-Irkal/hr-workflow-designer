@@ -28,14 +28,13 @@ export const Sidebar = () => {
   };
 
   return (
-    <aside className="w-80 min-w-[260px] bg-[#f1f4fa]h-full overflow-y-auto space-y-4">
+    <aside className="w-60 min-w-[260px] bg-[#f1f4fa]h-full overflow-y-auto space-y-4">
       <div className="space-y-1">
-        <p className="text-xs uppercase tracking-[0.16em] text-gray-500">Palette</p>
         <h2 className="text-lg font-bold text-gray-900">Node Library</h2>
         <p className="text-sm text-gray-600">Drag a node to the canvas to start a flow</p>
       </div>
 
-      <div className="space-y-3 pt-1">
+      <div className="space-y-2 pt-1">
         {nodeTypes.map((node, index) => {
           const Icon = node.icon;
           const colors = getColorClasses(node.color);
@@ -64,7 +63,7 @@ export const Sidebar = () => {
         })}
       </div>
 
-      <div className="mt-6 pt-4 space-y-2">
+      <div className="mt-4 pt-4 space-y-2">
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xs font-bold">i</div>
           <h3 className="text-sm font-bold text-gray-900">Quick Tips</h3>
@@ -80,7 +79,7 @@ export const Sidebar = () => {
           </li>
           <li className="flex items-start gap-2 text-xs text-gray-800">
             <span className="w-1.5 h-1.5 bg-gray-700 rounded-full mt-1.5 flex-shrink-0"></span>
-            Press <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200 font-mono text-[10px]">Delete</kbd> to remove items
+            Press <kbd className="px-1.5 py-0.5 bg-gray-100 rounded border border-gray-200 font-mono text-[10px]">Clear</kbd> to remove items
           </li>
         </ul>
       </div>

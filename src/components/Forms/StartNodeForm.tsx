@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { StartNodeData } from '../../types/workflow.types';
 import { useWorkflowStore } from '../../hooks/useWorkflowStore';
 import { X, Plus, Trash2 } from 'lucide-react';

@@ -18,7 +18,7 @@ import {
   AutomatedStepNode,
   EndNode,
 } from '../Nodes';
-import type { WorkflowNodeData } from '../../types/workflow.types';
+import type { WorkflowNodeData, WorkflowNode } from '../../types/workflow.types';
 
 const nodeTypes: NodeTypes = {
   start: StartNode,
@@ -126,7 +126,7 @@ const WorkflowCanvasInner = () => {
   );
 
   const onNodeClick = useCallback(
-    (_event: React.MouseEvent, node: any) => {
+    (_event: React.MouseEvent, node: WorkflowNode) => {
       setSelectedNode(node);
     },
     [setSelectedNode]
@@ -149,7 +149,7 @@ const WorkflowCanvasInner = () => {
       )}
       <ReactFlow
         className="min-h-full"
-        nodes={nodes as any}
+        nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}

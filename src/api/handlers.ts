@@ -1,5 +1,6 @@
 import { http, HttpResponse, delay } from 'msw';
 import { mockAutomationActions, simulateWorkflow } from './mocks';
+import type { WorkflowData } from '../types/workflow.types';
 
 export const handlers = [
   // GET /automations - returns list of automation actions
@@ -11,8 +12,8 @@ export const handlers = [
   // POST /simulate - simulates workflow execution
   http.post('/api/simulate', async ({ request }) => {
     await delay(500); // Simulate network delay
-    const workflow = await request.json();
-    const result = simulateWorkflow(workflow as any);
+    const workflow = (await request.json()) as WorkflowData;
+    const result = simulateWorkflow(workflow);
     return HttpResponse.json(result);
   }),
 ];

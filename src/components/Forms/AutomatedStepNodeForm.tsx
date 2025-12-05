@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { AutomatedStepNodeData } from '../../types/workflow.types';
 import { useWorkflowStore } from '../../hooks/useWorkflowStore';
 import { useAutomations } from '../../hooks/useAutomations';
-import { X, Plus, Trash2 } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface AutomatedStepNodeFormProps {
   nodeId: string;
@@ -25,16 +25,8 @@ export const AutomatedStepNodeForm = ({
 
   const selectedAction = automations.find((a) => a.id === actionId);
 
-  useEffect(() => {
-    if (selectedAction && !data.actionId) {
-      // Initialize parameters for newly selected action
-      const initialParams: Record<string, string> = {};
-      selectedAction.params.forEach((param) => {
-        initialParams[param] = '';
-      });
-      setParameters(initialParams);
-    }
-  }, [selectedAction, data.actionId]);
+  // Parameters are initialized on action change; if editing existing node,
+  // initial parameters come from node data.
 
   const handleActionChange = (newActionId: string) => {
     setActionId(newActionId);

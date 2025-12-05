@@ -1,6 +1,7 @@
 import { Sidebar } from './components/Canvas/Sidebar';
 import { WorkflowCanvas } from './components/Canvas/WorkflowCanvas';
-import { WorkflowSimulator } from './components/TestPanel/WorkflowSimulator';
+import { SimulatorModal } from './components/TestPanel/SimulatorModal';
+import { useSimulatorStore } from './hooks/useSimulatorStore';
 import { useWorkflowStore } from './hooks/useWorkflowStore';
 import {
   StartNodeForm,
@@ -9,7 +10,7 @@ import {
   AutomatedStepNodeForm,
   EndNodeForm,
 } from './components/Forms';
-import { Download, Upload, Trash2 } from 'lucide-react';
+import { Download, Upload, Trash2, Play } from 'lucide-react';
 
 function App() {
   const selectedNode = useWorkflowStore((state) => state.selectedNode);
@@ -19,6 +20,7 @@ function App() {
   const edges = useWorkflowStore((state) => state.edges);
   const loadWorkflow = useWorkflowStore((state) => state.loadWorkflow);
   const hasWorkflow = nodes.length > 0;
+  const startRun = useSimulatorStore((s) => s.startRun);
 
   const exportWorkflow = () => {
     const workflow = { nodes, edges };
@@ -44,7 +46,7 @@ function App() {
           try {
             const workflow = JSON.parse(event.target?.result as string);
             loadWorkflow(workflow.nodes, workflow.edges);
-          } catch (error) {
+          } catch {
             alert('Invalid workflow file');
           }
         };
@@ -104,6 +106,14 @@ function App() {
               <span className="text-sm font-semibold">Nodes {nodes.length} / Edges {edges.length}</span>
             </div>
             <button
+              onClick={() => startRun()}
+              className="flex items-center gap-2 px-4 py-2 bg-white/15 hover:bg-white/25 border border-white/30 rounded-lg text-sm font-medium text-white shadow-sm transition-all"
+              title="Run Simulator"
+            >
+              <Play className="w-4 h-4" />
+              Run Simulator
+            </button>
+            <button
               onClick={importWorkflow}
               className="flex items-center gap-2 px-4 py-2 bg-white/15 hover:bg-white/25 border border-white/30 rounded-lg text-sm font-medium text-white shadow-sm transition-all"
               title="Import Workflow"
@@ -143,7 +153,7 @@ function App() {
             {/* Canvas */}
             <div className="flex-1 flex flex-col gap-4 min-h-0">
               <WorkflowCanvas />
-              <WorkflowSimulator />
+              <SimulatorModal />
             </div>
 
             {/* Node Configuration Panel */}

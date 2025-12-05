@@ -25,7 +25,7 @@ export const WorkflowSimulator = () => {
 
       const data: SimulationResult = await response.json();
       setResult(data);
-    } catch (_error) {
+    } catch {
       setResult({
         success: false,
         steps: [],
