@@ -272,4 +272,4 @@ This project is created as part of a technical assessment.
 
 ## 🤝 Contact
 
-For questions or feedback about this implementation, please reach out to the development team.
+For questions or feedback about this implementation, please reach out to the krishnarajirkal@gmail.com.
